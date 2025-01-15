@@ -1,14 +1,21 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const Cohort = require("../models/Cohort.model");
+
 //Cohorts
 const cohorts = require("../cohorts.json");
 
-router.get("/api/cohorts", (req, res) => {
-  res.json(cohorts);
+router.get("/", async (req, res) => {
+  try {
+    const cohorts = await Cohort.find();
+    res.json(cohorts);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 });
 
-router.get("/api/cohorts/:cohortId", async (req, res, next) => {
+router.get("/:cohortId", async (req, res, next) => {
   const { cohortId } = req.params;
   if (mongoose.Types.ObjectId.isValid(cohortId)) {
   }
@@ -20,7 +27,7 @@ router.get("/api/cohorts/:cohortId", async (req, res, next) => {
   }
 });
 
-router.post("/api/cohorts", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const newCohort = await Cohort.create(req.body);
     res.status(201).json(newCohort);

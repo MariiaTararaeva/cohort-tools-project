@@ -1,11 +1,8 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
+const Student = require("../models/Student.model");
 
 //Students
-const students = require("./students.json");
-app.get("/", (req, res) => {
-  res.json(students);
-});
 router.post("/", async (req, res, next) => {
   try {
     const newStudent = await Student.create(req.body);
@@ -15,9 +12,10 @@ router.post("/", async (req, res, next) => {
   }
 });
 //Returns all the students
-router.get("/api/students", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const students = await student.find();
+    const students = await Student.find();
+    console.log(students);
     res.json(students);
   } catch (error) {
     next(error);

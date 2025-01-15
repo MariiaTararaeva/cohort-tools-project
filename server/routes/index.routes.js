@@ -3,13 +3,13 @@ const router = require("express").Router();
 // All the routes in there starts with "/api", see app.js to see how the router is imported and used
 
 // router.get("/", (req, res) => {
-//   res.json("All good in here");
+//   console.log("Hello from the server");
 // });
-router.get("/docs", (req, res) => {
-  res.sendFile(__dirname + "/views/docs.html");
-});
 
 const cohortsRoutes = require("./cohorts.routes");
 router.use("/cohorts", cohortsRoutes);
+
+const studentsRoutes = require("./students.routes");
+router.use("/students", studentsRoutes);
 
 module.exports = router;
