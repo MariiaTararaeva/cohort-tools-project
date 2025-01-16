@@ -12,4 +12,7 @@ router.use("/cohorts", cohortsRoutes);
 const studentsRoutes = require("./students.routes");
 router.use("/students", studentsRoutes);
 
+const usersRoutes = require("./user.routes");
+router.use("/users", usersRoutes);
+
 module.exports = router;
